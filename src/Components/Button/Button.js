@@ -1,23 +1,20 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import Loader from "react-loader-spinner";
 import s from "./Button.module.css";
 
-export default class Button extends Component {
-  static propTypes = {
-    pageNumber: PropTypes.func.isRequired,
-  };
+const Button = ({ onClick, isLoading }) => {
+  return (
+    <button className={s.button} type="button" onClick={onClick}>
+      <Loader
+        className={s.loader}
+        type="TailSpin"
+        color="#00BFFF"
+        height={20}
+        width={20}
+        visible={isLoading}
+      />
+      {isLoading ? "" : "Load more"}
+    </button>
+  );
+};
 
-  loadMore = () => {
-    this.props.pageNumber();
-  };
-
-  render() {
-    return (
-      <div className={s.ButtonDiv}>
-        <button className={s.Button} onClick={this.loadMore}>
-          Load more
-        </button>
-      </div>
-    );
-  }
-}
+export default Button;
